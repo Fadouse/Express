@@ -6,6 +6,7 @@ import cc.express.event.EventTarget;
 import cc.express.event.events.KeyInputEvent;
 import cc.express.modules.movement.Sprint;
 import cc.express.modules.render.BlockHit;
+import cc.express.modules.render.ClickGui;
 import cc.express.modules.render.FullBright;
 import cc.express.modules.render.HUD;
 import cc.express.modules.values.Value;
@@ -23,6 +24,7 @@ public enum ModuleManager {
         addModule(new Sprint());
         addModule(new BlockHit());
         addModule(new FullBright());
+        addModule(new ClickGui());
         addModule(new HUD());
     }
 
