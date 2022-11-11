@@ -19,7 +19,6 @@ public class ClickGui extends Module {
         this.setState(false);
     }
     public static enum ClickGuiMode {
-        New,
         Normal,
         Novoline,
     }

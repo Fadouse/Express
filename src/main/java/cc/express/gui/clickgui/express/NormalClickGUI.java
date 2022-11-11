@@ -111,32 +111,32 @@ public class NormalClickGUI extends GuiScreen
 
 				RenderUtil.drawCircle(startX + 28F, startY + 38.0F + (float) (m * 42),16,new Color(80, 80, 80,160).getRGB());
 				if (mY[m].toString() == "Combat") {
-					RenderUtil.drawImage(new ResourceLocation("romantic/icon/clickgui/Combat.png"),(int)startX + 20, (int)startY + 30+ m * 42 , 16, 16);
-				}if (mY[m].toString() == "Move") {
-					RenderUtil.drawImage(new ResourceLocation("romantic/icon/clickgui/Move.png"),(int)startX + 20, (int)startY + 30 + m * 42, 16, 16);
+					RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/Combat.png"),(int)startX + 20, (int)startY + 30+ m * 42 , 16, 16);
+				}if (mY[m].toString() == "Movement") {
+					RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/Move.png"),(int)startX + 20, (int)startY + 30 + m * 42, 16, 16);
 				}if (mY[m].toString() == "Player") {
-					RenderUtil.drawImage(new ResourceLocation("romantic/icon/clickgui/Player.png"),(int)startX + 20, (int)startY + 30 + m * 42, 16, 16);
-				}if (mY[m].toString() == "Visual") {
-					RenderUtil.drawImage(new ResourceLocation("romantic/icon/clickgui/Render.png"),(int)startX + 20, (int)startY + 30+ m * 42 , 16, 16);
+					RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/Player.png"),(int)startX + 20, (int)startY + 30 + m * 42, 16, 16);
+				}if (mY[m].toString() == "Render") {
+					RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/Render.png"),(int)startX + 20, (int)startY + 30+ m * 42 , 16, 16);
 				}if (mY[m].toString() == "World") {
-					RenderUtil.drawImage(new ResourceLocation("romantic/icon/clickgui/World.png"),(int)startX + 20, (int)startY + 30 + m * 42, 16, 16);
-				}if (mY[m].toString() == "Exploit") {
-					RenderUtil.drawImage(new ResourceLocation("romantic/icon/clickgui/Exploit.png"),(int)startX + 20, (int)startY + 30+ m * 42 , 16, 16);
+					RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/World.png"),(int)startX + 20, (int)startY + 30 + m * 42, 16, 16);
+				}if (mY[m].toString() == "Misc") {
+					RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/Exploit.png"),(int)startX + 20, (int)startY + 30+ m * 42 , 16, 16);
 				}
 			} else {
 				RenderUtil.drawCircle(startX + 28F, startY + 38.0F + (float) (m * 42),16,new Color(61, 141, 255,160).getRGB());
 				if (mY[m].toString() == "Combat") {
-					RenderUtil.drawImage(new ResourceLocation("romantic/icon/clickgui/Combat.png"),(int)startX + 20, (int)startY + 30+ m * 42 , 16, 16);
-				}if (mY[m].toString() == "Move") {
-					RenderUtil.drawImage(new ResourceLocation("romantic/icon/clickgui/Move.png"),(int)startX + 20, (int)startY + 30 + m * 42, 16, 16);
+					RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/Combat.png"),(int)startX + 20, (int)startY + 30+ m * 42 , 16, 16);
+				}if (mY[m].toString() == "Movement") {
+					RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/Move.png"),(int)startX + 20, (int)startY + 30 + m * 42, 16, 16);
 				}if (mY[m].toString() == "Player") {
-					RenderUtil.drawImage(new ResourceLocation("romantic/icon/clickgui/Player.png"),(int)startX + 20, (int)startY + 30 + m * 42, 16, 16);
-				}if (mY[m].toString() == "Visual") {
-					RenderUtil.drawImage(new ResourceLocation("romantic/icon/clickgui/Render.png"),(int)startX + 20, (int)startY + 30+ m * 42 , 16, 16);
+					RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/Player.png"),(int)startX + 20, (int)startY + 30 + m * 42, 16, 16);
+				}if (mY[m].toString() == "Render") {
+					RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/Render.png"),(int)startX + 20, (int)startY + 30+ m * 42 , 16, 16);
 				}if (mY[m].toString() == "World") {
-					RenderUtil.drawImage(new ResourceLocation("romantic/icon/clickgui/World.png"),(int)startX + 20, (int)startY + 30 + m * 42, 16, 16);
-				}if (mY[m].toString() == "Exploit") {
-					RenderUtil.drawImage(new ResourceLocation("romantic/icon/clickgui/Exploit.png"),(int)startX + 20, (int)startY + 30 + m * 42 , 16, 16);
+					RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/World.png"),(int)startX + 20, (int)startY + 30 + m * 42, 16, 16);
+				}if (mY[m].toString() == "Misc") {
+					RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/Exploit.png"),(int)startX + 20, (int)startY + 30 + m * 42 , 16, 16);
 				}
 			}
 			try {
