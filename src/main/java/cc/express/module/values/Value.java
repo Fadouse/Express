@@ -1,4 +1,4 @@
-package cc.express.modules.values;
+package cc.express.module.values;
 
 import cc.express.event.events.ValueEvent;
 import cc.express.event.EventBus;

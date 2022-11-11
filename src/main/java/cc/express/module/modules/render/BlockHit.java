@@ -1,7 +1,7 @@
-package cc.express.modules.render;
+package cc.express.module.modules.render;
 
-import cc.express.modules.Category;
-import cc.express.modules.Module;
+import cc.express.module.Category;
+import cc.express.module.Module;
 
 public class BlockHit extends Module {
     public BlockHit() {

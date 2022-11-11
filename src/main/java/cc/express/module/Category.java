@@ -1,4 +1,4 @@
-package cc.express.modules;
+package cc.express.module;
 
 public enum Category {
     Combat,

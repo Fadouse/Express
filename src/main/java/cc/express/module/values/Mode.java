@@ -1,4 +1,4 @@
-package cc.express.modules.values;
+package cc.express.module.values;
 
 
 public class Mode<V extends Enum<?>> extends Value<V> {

@@ -4,7 +4,7 @@ import cc.express.gui.altmanager.AltManager;
 import cc.express.gui.fontrender.FontManager;
 import cc.express.command.CommandManager;
 import cc.express.event.EventBus;
-import cc.express.modules.ModuleManager;
+import cc.express.module.ModuleManager;
 import cc.express.plugin.PluginAPI;
 import cc.express.plugin.PluginLoader;
 import cc.express.utils.FileManager;

@@ -1,7 +1,7 @@
 package cc.express.event.events;
 
 import cc.express.event.Event;
-import cc.express.modules.values.Value;
+import cc.express.module.values.Value;
 
 public class ValueEvent extends Event {
     private final Value<?> value;

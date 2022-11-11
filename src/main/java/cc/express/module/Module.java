@@ -1,7 +1,7 @@
-package cc.express.modules;
+package cc.express.module;
 
 import cc.express.event.EventBus;
-import cc.express.modules.values.Value;
+import cc.express.module.values.Value;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumChatFormatting;
 

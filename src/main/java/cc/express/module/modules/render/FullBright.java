@@ -1,9 +1,9 @@
-package cc.express.modules.render;
+package cc.express.module.modules.render;
 
 import cc.express.event.events.TickEvent;
 import cc.express.event.EventTarget;
-import cc.express.modules.Category;
-import cc.express.modules.Module;
+import cc.express.module.Category;
+import cc.express.module.Module;
 
 public class FullBright extends Module {
     float old;

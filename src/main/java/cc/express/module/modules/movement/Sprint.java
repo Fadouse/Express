@@ -1,9 +1,9 @@
-package cc.express.modules.movement;
+package cc.express.module.modules.movement;
 
 import cc.express.event.events.TickEvent;
 import cc.express.event.EventTarget;
-import cc.express.modules.Category;
-import cc.express.modules.Module;
+import cc.express.module.Category;
+import cc.express.module.Module;
 
 public class Sprint extends Module {
     public Sprint() {

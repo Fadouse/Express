@@ -1,7 +1,7 @@
 package net.minecraft.client.renderer;
 
-import cc.express.modules.ModuleManager;
-import cc.express.modules.render.BlockHit;
+import cc.express.module.ModuleManager;
+import cc.express.module.modules.render.BlockHit;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

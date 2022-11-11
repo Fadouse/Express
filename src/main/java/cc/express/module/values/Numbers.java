@@ -1,4 +1,4 @@
-package cc.express.modules.values;
+package cc.express.module.values;
 
 public class Numbers<N extends Number> extends Value<N> {
     N max,min,inc;

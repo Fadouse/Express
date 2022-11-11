@@ -1,15 +1,15 @@
-package cc.express.modules;
+package cc.express.module;
 
 
 import cc.express.event.EventBus;
 import cc.express.event.EventTarget;
 import cc.express.event.events.KeyInputEvent;
-import cc.express.modules.movement.Sprint;
-import cc.express.modules.render.BlockHit;
-import cc.express.modules.render.ClickGui;
-import cc.express.modules.render.FullBright;
-import cc.express.modules.render.HUD;
-import cc.express.modules.values.Value;
+import cc.express.module.modules.movement.Sprint;
+import cc.express.module.modules.render.BlockHit;
+import cc.express.module.modules.render.ClickGui;
+import cc.express.module.modules.render.FullBright;
+import cc.express.module.modules.render.HUD;
+import cc.express.module.values.Value;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
-package cc.express.modules.render;
+package cc.express.module.modules.render;
 
 import cc.express.gui.clickgui.express.NormalClickGUI;
-import cc.express.modules.Category;
-import cc.express.modules.Module;
-import cc.express.modules.values.Mode;
+import cc.express.module.Category;
+import cc.express.module.Module;
+import cc.express.module.values.Mode;
 
 public class ClickGui extends Module {
 

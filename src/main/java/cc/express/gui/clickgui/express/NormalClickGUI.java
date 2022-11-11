@@ -1,13 +1,13 @@
 package cc.express.gui.clickgui.express;
 
 import cc.express.gui.fontrender.FontManager;
-import cc.express.modules.Category;
-import cc.express.modules.Module;
-import cc.express.modules.ModuleManager;
-import cc.express.modules.values.Mode;
-import cc.express.modules.values.Numbers;
-import cc.express.modules.values.Option;
-import cc.express.modules.values.Value;
+import cc.express.module.Category;
+import cc.express.module.Module;
+import cc.express.module.ModuleManager;
+import cc.express.module.values.Mode;
+import cc.express.module.values.Numbers;
+import cc.express.module.values.Option;
+import cc.express.module.values.Value;
 import net.minecraft.client.gui.*;
 import org.lwjgl.input.*;
 import java.awt.*;
@@ -100,6 +100,7 @@ public class NormalClickGUI extends GuiScreen
 				(new Color(31, 31, 31, (int) this.opacity.getOpacity())).getRGB());
 		RenderUtil.drawRect(startX + 200.0F, startY, startX + 420.0F, startY + 320.0F,
 				(new Color(40, 40, 40, (int) this.opacity.getOpacity())).getRGB());
+		cc.express.utils.RenderUtil.drawShadow(startX,startY,startX+420,startY+320);
 
 //		FontManager.F20.drawStringWithShadow(Client.USERNAME,startX + (60 - FontLoaders.Baloo20.getStringWidth(Client.USERNAME))/ 2,startY + 300,new Color(255,255,255,255).getRGB());
 //		RenderUtil.drawRainbowRect(startX, startY, startX + 419, startY + 1);
