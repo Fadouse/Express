@@ -1,5 +1,8 @@
 package net.minecraft.network;
 
+import cc.express.event.EventManager;
+import cc.express.event.misc.EventPacket;
+import cc.express.event.world.EventPacketReceive;
 import com.google.common.collect.Queues;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import io.netty.bootstrap.Bootstrap;
@@ -148,6 +151,14 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
 
     protected void channelRead0(ChannelHandlerContext p_channelRead0_1_, Packet p_channelRead0_2_) throws Exception
     {
+        //Call packetReceive and packet
+        EventPacketReceive packetReceive = new EventPacketReceive(p_channelRead0_2_);
+        EventManager.call(packetReceive);
+        EventPacket eventPacket = new EventPacket(p_channelRead0_2_, false);
+        EventManager.call(eventPacket);
+        if(eventPacket.isCancelled())
+            return;
+
         if (this.channel.isOpen())
         {
             try

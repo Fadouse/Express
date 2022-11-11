@@ -1,7 +1,5 @@
 
 package cc.express.gui.altmanager;
-import java.io.IOException;
-import java.util.Random;
 
 import cc.express.gui.fontrender.FontManager;
 import cc.express.utils.FileManager;
@@ -13,6 +11,9 @@ import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
+import java.util.Random;
 
 public class GuiAltManager
 extends GuiScreen {

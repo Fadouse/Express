@@ -3,6 +3,10 @@ package net.minecraft.client.entity;
 import cc.express.Client;
 import cc.express.command.Command;
 import cc.express.command.CommandManager;
+import cc.express.event.EventManager;
+import cc.express.event.misc.EventChat;
+import cc.express.event.world.EventMove;
+import cc.express.event.world.EventUpdate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -186,16 +190,15 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void onUpdateWalkingPlayer()
     {
+        EventUpdate PRE = new EventUpdate(rotationYaw, rotationPitch, posX, posY, posZ, onGround);
+        EventManager.call(PRE);
+
         boolean flag = this.isSprinting();
 
-        if (flag != this.serverSprintState)
-        {
-            if (flag)
-            {
+        if (flag != this.serverSprintState) {
+            if (flag) {
                 this.sendQueue.addToSendQueue(new C0BPacketEntityAction(this, C0BPacketEntityAction.Action.START_SPRINTING));
-            }
-            else
-            {
+            } else {
                 this.sendQueue.addToSendQueue(new C0BPacketEntityAction(this, C0BPacketEntityAction.Action.STOP_SPRINTING));
             }
 
@@ -204,71 +207,64 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
         boolean flag1 = this.isSneaking();
 
-        if (flag1 != this.serverSneakState)
-        {
-            if (flag1)
-            {
+        if (flag1 != this.serverSneakState) {
+            if (flag1) {
                 this.sendQueue.addToSendQueue(new C0BPacketEntityAction(this, C0BPacketEntityAction.Action.START_SNEAKING));
-            }
-            else
-            {
+            } else {
                 this.sendQueue.addToSendQueue(new C0BPacketEntityAction(this, C0BPacketEntityAction.Action.STOP_SNEAKING));
             }
 
             this.serverSneakState = flag1;
         }
 
-        if (this.isCurrentViewEntity())
-        {
-            double d0 = this.posX - this.lastReportedPosX;
-            double d1 = this.getEntityBoundingBox().minY - this.lastReportedPosY;
-            double d2 = this.posZ - this.lastReportedPosZ;
-            double d3 = (double)(this.rotationYaw - this.lastReportedYaw);
-            double d4 = (double)(this.rotationPitch - this.lastReportedPitch);
+        if (this.isCurrentViewEntity()) {
+            boolean flag3;
+            double x = PRE.getX();
+            double y = PRE.getY();
+            double z = PRE.getZ();
+            float yaw = PRE.getYaw();
+            float pitch = PRE.getPitch();
+            boolean ground = PRE.isOnGround();
+            double d0 = x - this.lastReportedPosX;
+            double d1 = y - this.lastReportedPosY;
+            double d2 = z - this.lastReportedPosZ;
+            double d3 = yaw - this.lastReportedYaw;
+            double d4 = pitch - this.lastReportedPitch;
             boolean flag2 = d0 * d0 + d1 * d1 + d2 * d2 > 9.0E-4D || this.positionUpdateTicks >= 20;
-            boolean flag3 = d3 != 0.0D || d4 != 0.0D;
 
-            if (this.ridingEntity == null)
-            {
-                if (flag2 && flag3)
-                {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.posX, this.getEntityBoundingBox().minY, this.posZ, this.rotationYaw, this.rotationPitch, this.onGround));
-                }
-                else if (flag2)
-                {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(this.posX, this.getEntityBoundingBox().minY, this.posZ, this.onGround));
-                }
-                else if (flag3)
-                {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook(this.rotationYaw, this.rotationPitch, this.onGround));
-                }
-                else
-                {
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer(this.onGround));
-                }
+            boolean bl = flag3 = d3 != 0.0 || d4 != 0.0;
+            if (flag2 && flag3) {
+                sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(x, y, z, yaw, pitch, ground));
+            } else if (flag2) {
+                sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(x, y, z, ground));
+            } else if (flag3) {
+                sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook(yaw, pitch, ground));
+            } else {
+                sendQueue.addToSendQueue(new C03PacketPlayer(ground));
             }
-            else
-            {
-                this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.motionX, -999.0D, this.motionZ, this.rotationYaw, this.rotationPitch, this.onGround));
-                flag2 = false;
-            }
-
             ++this.positionUpdateTicks;
-
-            if (flag2)
-            {
-                this.lastReportedPosX = this.posX;
-                this.lastReportedPosY = this.getEntityBoundingBox().minY;
-                this.lastReportedPosZ = this.posZ;
+            if (flag2) {
+                this.lastReportedPosX = x;
+                this.lastReportedPosY = y;
+                this.lastReportedPosZ = z;
                 this.positionUpdateTicks = 0;
             }
-
-            if (flag3)
-            {
-                this.lastReportedYaw = this.rotationYaw;
-                this.lastReportedPitch = this.rotationPitch;
+            if (flag3) {
+                this.lastReportedYaw = yaw;
+                this.lastReportedPitch = pitch;
             }
+            EventUpdate POST = new EventUpdate(yaw, pitch);
+            EventManager.call(POST);
         }
+    }
+
+    @Override
+    public void moveEntity(double x, double y, double z) {
+        EventMove e = (EventMove) EventManager.call(new EventMove(x, y, z));
+        super.moveEntity(e.getX(), e.getY(), e.getZ());
+    }
+    public final boolean isMoving() {
+        return this.mc.thePlayer.moveForward != 0.0f || this.mc.thePlayer.moveStrafing != 0.0f;
     }
 
     /**
@@ -293,6 +289,11 @@ public class EntityPlayerSP extends AbstractClientPlayer
      */
     public void sendChatMessage(String message)
     {
+        //Call Chat event
+        EventChat event = new EventChat(message);
+        EventManager.call(event);
+
+        //Do Command else send message
         if(message.startsWith(Client.instance.commandPrefix)){
             String[] args = message.trim().substring(1).split(" ");
             Command c = CommandManager.instance.getCommand(args[0]);

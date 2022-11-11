@@ -1,5 +1,7 @@
 package net.minecraft.client.renderer.entity.layers;
 
+import cc.express.event.EventManager;
+import cc.express.event.rendering.EventRenderCape;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -17,6 +19,9 @@ public class LayerCape implements LayerRenderer<AbstractClientPlayer>
 
     public void doRenderLayer(AbstractClientPlayer entitylivingbaseIn, float p_177141_2_, float p_177141_3_, float partialTicks, float p_177141_5_, float p_177141_6_, float p_177141_7_, float scale)
     {
+        //call Cape event
+        EventRenderCape event = new EventRenderCape(entitylivingbaseIn.getLocationCape(), entitylivingbaseIn);
+        EventManager.call(event);
         if (entitylivingbaseIn.hasPlayerInfo() && !entitylivingbaseIn.isInvisible() && entitylivingbaseIn.isWearing(EnumPlayerModelParts.CAPE) && entitylivingbaseIn.getLocationCape() != null)
         {
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

@@ -1,5 +1,9 @@
 package net.minecraft.client.network;
 
+import cc.express.event.EventManager;
+import cc.express.event.misc.EventChatReceive;
+import cc.express.event.misc.EventTeleport;
+import cc.express.event.world.EventPacketSend;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -676,6 +680,17 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
         float f = packetIn.getYaw();
         float f1 = packetIn.getPitch();
 
+        //call teleport
+        final EventTeleport event = new EventTeleport(
+                new C03PacketPlayer.C06PacketPlayerPosLook(entityplayer.posX, entityplayer.posY, entityplayer.posZ, entityplayer.rotationYaw, entityplayer.rotationPitch, false),
+                d0,
+                d1,
+                d2,
+                f,
+                f1
+        );
+        EventManager.call(event);
+
         if (packetIn.func_179834_f().contains(S08PacketPlayerPosLook.EnumFlags.X))
         {
             d0 += entityplayer.posX;
@@ -813,6 +828,12 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
 
     public void addToSendQueue(Packet p_147297_1_)
     {
+        //Call packet send
+        EventPacketSend packetSent = new EventPacketSend(p_147297_1_);
+        EventManager.call(packetSent);
+        if (packetSent.isCancelled()) {
+            return;
+        }
         this.netManager.sendPacket(p_147297_1_);
     }
 
@@ -848,8 +869,10 @@ public class NetHandlerPlayClient implements INetHandlerPlayClient
      */
     public void handleChat(S02PacketChat packetIn)
     {
+        //Call eventChatReceive
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, this, this.gameController);
-
+        EventChatReceive eventChatReceive = new EventChatReceive(packetIn.getType(), packetIn.getChatComponent());
+        EventManager.call(eventChatReceive);
         if (packetIn.getType() == 2)
         {
             this.gameController.ingameGUI.setRecordPlaying(packetIn.getChatComponent(), false);

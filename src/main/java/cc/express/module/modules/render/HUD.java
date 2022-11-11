@@ -1,8 +1,8 @@
 package cc.express.module.modules.render;
 
-import cc.express.event.events.Render2DEvent;
-import cc.express.gui.fontrender.FontManager;
 import cc.express.event.EventTarget;
+import cc.express.event.rendering.EventRender2D;
+import cc.express.gui.fontrender.FontManager;
 import cc.express.module.Category;
 import cc.express.module.Module;
 import cc.express.module.ModuleManager;
@@ -19,7 +19,7 @@ public class HUD extends Module {
     }
 
     @EventTarget
-    public void onRender(Render2DEvent e){
+    public void onRender(EventRender2D e){
         int rainbowTick = 0;
         ScaledResolution s = new ScaledResolution(mc);
         int y = 1;

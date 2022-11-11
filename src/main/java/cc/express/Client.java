@@ -1,13 +1,14 @@
 package cc.express;
 
+import cc.express.command.CommandManager;
+import cc.express.event.EventManager;
 import cc.express.gui.altmanager.AltManager;
 import cc.express.gui.fontrender.FontManager;
-import cc.express.command.CommandManager;
-import cc.express.event.EventBus;
 import cc.express.module.ModuleManager;
 import cc.express.plugin.PluginAPI;
 import cc.express.plugin.PluginLoader;
 import cc.express.utils.FileManager;
+import com.google.common.eventbus.EventBus;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.Display;
 
@@ -25,7 +26,7 @@ public class Client {
 
     public Client(){
         instance = this;
-        EventBus.getInstance().register(this);
+        EventManager.register(this);
         Display.setTitle("Client Loading...");
         api.loadAll(new File(Minecraft.getMinecraft().mcDataDir,"plugins"));
         FontManager.init();

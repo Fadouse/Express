@@ -1,5 +1,7 @@
 package net.minecraft.block;
 
+import cc.express.event.EventManager;
+import cc.express.event.world.EventSlowDown;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -29,7 +31,11 @@ public class BlockSoulSand extends Block
      */
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
-        entityIn.motionX *= 0.4D;
-        entityIn.motionZ *= 0.4D;
+        final EventSlowDown event = new EventSlowDown(EventSlowDown.Type.SoulSand);
+        EventManager.call(event);
+        if (!event.isCancelled()) {
+            entityIn.motionX *= 0.4D;
+            entityIn.motionZ *= 0.4D;
+        }
     }
 }

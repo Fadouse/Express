@@ -1,7 +1,5 @@
 package cc.express.gui.altmanager;
 
-import java.io.IOException;
-
 import cc.express.gui.fontrender.FontManager;
 import cc.express.utils.FileManager;
 import me.ratsiel.auth.abstracts.exception.AuthenticationException;
@@ -11,6 +9,8 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import org.lwjgl.input.Keyboard;
+
+import java.io.IOException;
 
 public class GuiAddAlt
 extends GuiScreen {

@@ -1,8 +1,8 @@
 package cc.express.gui.fontrender;
 
+import assist.CharUtils;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import org.lwjgl.opengl.GL11;
-import assist.CharUtils;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;

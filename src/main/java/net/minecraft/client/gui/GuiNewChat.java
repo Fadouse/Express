@@ -1,5 +1,8 @@
 package net.minecraft.client.gui;
 
+import cc.express.event.EventManager;
+import cc.express.event.misc.EventChat;
+import cc.express.event.misc.EventChatComponent;
 import com.google.common.collect.Lists;
 import java.util.Iterator;
 import java.util.List;
@@ -129,8 +132,14 @@ public class GuiNewChat extends Gui
      */
     public void printChatMessageWithOptionalDeletion(IChatComponent chatComponent, int chatLineId)
     {
+        //Call chatComponent event and chat event(They are different don't delete)
+        EventChatComponent event = new EventChatComponent(chatComponent);
+        EventManager.call(event);
+        if(event.isCancelled()) return;
         this.setChatLine(chatComponent, chatLineId, this.mc.ingameGUI.getUpdateCounter(), false);
         logger.info("[CHAT] " + chatComponent.getUnformattedText());
+        EventChat eventChat = new EventChat(chatComponent.getUnformattedText());
+        EventManager.call(eventChat);
     }
 
     private void setChatLine(IChatComponent chatComponent, int chatLineId, int updateCounter, boolean displayOnly)

@@ -8,12 +8,12 @@ import cc.express.module.values.Mode;
 import cc.express.module.values.Numbers;
 import cc.express.module.values.Option;
 import cc.express.module.values.Value;
-import net.minecraft.client.gui.*;
-import org.lwjgl.input.*;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Mouse;
+
 import java.awt.*;
 import java.io.IOException;
-
-import net.minecraft.util.*;
 
 
 /**

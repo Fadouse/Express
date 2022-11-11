@@ -1,7 +1,7 @@
 package cc.express.module.modules.render;
 
-import cc.express.event.events.TickEvent;
 import cc.express.event.EventTarget;
+import cc.express.event.world.EventTick;
 import cc.express.module.Category;
 import cc.express.module.Module;
 
@@ -23,7 +23,7 @@ public class FullBright extends Module {
     }
 
     @EventTarget
-    public void onTick(TickEvent e){
+    public void onTick(EventTick e){
         mc.gameSettings.gammaSetting = 300;
     }
 }

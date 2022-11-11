@@ -1,6 +1,6 @@
 package cc.express.module;
 
-import cc.express.event.EventBus;
+import cc.express.event.EventManager;
 import cc.express.module.values.Value;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumChatFormatting;
@@ -47,10 +47,10 @@ public class Module {
         }
         this.state = state;
         if (state) {
-            EventBus.getInstance().register(this);
+            EventManager.register(this);
             enable();
         } else {
-            EventBus.getInstance().unregister(this);
+            EventManager.unregister(this);
             disable();
         }
     }

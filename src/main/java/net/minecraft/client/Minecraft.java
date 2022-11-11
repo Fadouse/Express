@@ -1,9 +1,11 @@
 package net.minecraft.client;
 
 import cc.express.Client;
-import cc.express.event.EventBus;
-import cc.express.event.events.KeyInputEvent;
-import cc.express.event.events.TickEvent;
+import cc.express.event.EventManager;
+import cc.express.event.misc.EventClick;
+import cc.express.event.misc.EventKey;
+import cc.express.event.world.EventTick;
+import cc.express.event.world.EventWorldLoad;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -1534,6 +1536,10 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     {
         if (this.leftClickCounter <= 0)
         {
+
+            //Call eventClick
+            EventClick eventClick = new EventClick();
+            EventManager.call(eventClick);
             this.thePlayer.swingItem();
 
             if (this.objectMouseOver == null)
@@ -1751,7 +1757,9 @@ public class Minecraft implements IThreadListener, IPlayerUsage
      */
     public void runTick() throws IOException
     {
-        EventBus.getInstance().call(new TickEvent());
+        if (this.thePlayer != null) {
+            EventManager.call(new EventTick());
+        }
         if (this.rightClickDelayTimer > 0)
         {
             --this.rightClickDelayTimer;
@@ -1957,7 +1965,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
                     }
                     else
                     {
-                        EventBus.getInstance().call(new KeyInputEvent(k));
+                        //Call Key Event =)
+                        EventManager.call(new EventKey(k));
                         if (k == 1)
                         {
                             this.displayInGameMenu();
@@ -2431,6 +2440,8 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             this.thePlayer.movementInput = new MovementInputFromOptions(this.gameSettings);
             this.playerController.setPlayerCapabilities(this.thePlayer);
             this.renderViewEntity = this.thePlayer;
+            EventWorldLoad reloadEvent = new EventWorldLoad(worldClientIn);
+            EventManager.call(reloadEvent);
         }
         else
         {

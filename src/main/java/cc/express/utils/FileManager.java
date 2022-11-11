@@ -1,21 +1,13 @@
 package cc.express.utils;
 
-import java.io.InputStreamReader;
-import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.io.IOException;
-import java.io.FileNotFoundException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.PrintWriter;
-import java.io.FileWriter;
-
 import cc.express.Client;
 import cc.express.gui.altmanager.Alt;
 import cc.express.gui.altmanager.AltManager;
 import net.minecraft.client.Minecraft;
-import java.io.File;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileManager
 {

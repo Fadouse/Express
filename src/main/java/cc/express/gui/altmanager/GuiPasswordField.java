@@ -1,12 +1,12 @@
 package cc.express.gui.altmanager;
 
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.ChatAllowedCharacters;
-import net.minecraft.client.renderer.WorldRenderer;
-import org.lwjgl.opengl.GL11;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.util.ChatAllowedCharacters;
+import org.lwjgl.opengl.GL11;
 
 public final class GuiPasswordField extends Gui
 {

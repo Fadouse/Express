@@ -1,7 +1,8 @@
 package net.minecraft.client.gui;
 
-import cc.express.event.EventBus;
-import cc.express.event.events.Render2DEvent;
+import cc.express.event.EventManager;
+import cc.express.event.rendering.EventDrawText;
+import cc.express.event.rendering.EventRender2D;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -361,7 +362,8 @@ public class GuiIngame extends Gui
         {
             this.overlayPlayerList.updatePlayerList(false);
         }
-
+        //call render2d;
+        EventManager.call(new EventRender2D(partialTicks));
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.disableLighting();
         GlStateManager.enableAlpha();
@@ -369,7 +371,7 @@ public class GuiIngame extends Gui
 
     protected void renderTooltip(ScaledResolution sr, float partialTicks)
     {
-        EventBus.getInstance().call(new Render2DEvent(partialTicks));
+
         if (this.mc.getRenderViewEntity() instanceof EntityPlayer)
         {
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -611,6 +613,9 @@ public class GuiIngame extends Gui
             if (j == collection.size())
             {
                 String s3 = objective.getDisplayName();
+                //call draw text
+                EventDrawText eventDrawText = new EventDrawText(s3);
+                EventManager.call(eventDrawText);
                 drawRect(l1 - 2, k - this.getFontRenderer().FONT_HEIGHT - 1, l, k - 1, 1610612736);
                 drawRect(l1 - 2, k - 1, l, k, 1342177280);
                 this.getFontRenderer().drawString(s3, l1 + i / 2 - this.getFontRenderer().getStringWidth(s3) / 2, k - this.getFontRenderer().FONT_HEIGHT, 553648127);

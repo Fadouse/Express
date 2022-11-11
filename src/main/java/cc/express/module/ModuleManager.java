@@ -1,9 +1,9 @@
 package cc.express.module;
 
 
-import cc.express.event.EventBus;
+import cc.express.event.EventManager;
 import cc.express.event.EventTarget;
-import cc.express.event.events.KeyInputEvent;
+import cc.express.event.misc.EventKey;
 import cc.express.module.modules.movement.Sprint;
 import cc.express.module.modules.render.BlockHit;
 import cc.express.module.modules.render.ClickGui;
@@ -19,7 +19,7 @@ public enum ModuleManager {
     instance;
 
     public void init(){
-        EventBus.getInstance().register(this);
+        EventManager.register(this);
         System.out.println("init modules...");
         addModule(new Sprint());
         addModule(new BlockHit());
@@ -29,7 +29,7 @@ public enum ModuleManager {
     }
 
     @EventTarget
-    public void onKey(KeyInputEvent e){
+    public void onKey(EventKey e){
         for (Module m : modules){
             if(m.getKey() == e.getKey()){
                 m.toggle();

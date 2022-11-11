@@ -13,7 +13,6 @@ import org.lwjgl.opengl.GL11;
 
 import static cc.express.module.Module.mc;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.glEnable;
 
 public class RenderUtil {
     //Color

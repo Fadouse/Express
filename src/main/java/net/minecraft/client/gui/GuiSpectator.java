@@ -1,7 +1,5 @@
 package net.minecraft.client.gui;
 
-import cc.express.event.EventBus;
-import cc.express.event.events.Render2DEvent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.spectator.ISpectatorMenuObject;
 import net.minecraft.client.gui.spectator.ISpectatorMenuRecipient;
@@ -48,7 +46,6 @@ public class GuiSpectator extends Gui implements ISpectatorMenuRecipient
 
     public void renderTooltip(ScaledResolution p_175264_1_, float p_175264_2_)
     {
-        EventBus.getInstance().call(new Render2DEvent(p_175264_2_));
         if (this.field_175271_i != null)
         {
             float f = this.func_175265_c();

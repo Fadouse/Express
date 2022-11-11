@@ -1,24 +1,28 @@
 package cc.express.gui.clickgui.express;
 
 
-import net.minecraft.client.*;
-import java.awt.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.entity.player.*;
-import com.mojang.authlib.*;
-
-import net.minecraft.client.network.*;
-
-import java.io.*;
-import net.minecraft.util.*;
-import net.minecraft.client.renderer.vertex.*;
-import net.minecraft.client.shader.*;
-import org.lwjgl.opengl.*;
+import com.mojang.authlib.GameProfile;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.network.NetworkPlayerInfo;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.shader.Framebuffer;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.ARBShaderObjects;
+import org.lwjgl.opengl.EXTFramebufferObject;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Cylinder;
 
-import net.minecraft.entity.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.renderer.entity.*;
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 public enum RenderUtil

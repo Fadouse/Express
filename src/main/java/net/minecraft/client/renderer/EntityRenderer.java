@@ -1,5 +1,7 @@
 package net.minecraft.client.renderer;
 
+import cc.express.event.EventManager;
+import cc.express.event.rendering.EventRender3D;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.gson.JsonSyntaxException;
@@ -11,8 +13,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Callable;
 
-import cc.express.event.EventBus;
-import cc.express.event.events.Render3DEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.material.Material;
@@ -1781,6 +1781,11 @@ public class EntityRenderer implements IResourceManagerReloadListener
         }
 
         this.mc.mcProfiler.endStartSection("hand");
+        //call render3d
+        GL11.glPushMatrix();
+        EventManager.call(new EventRender3D(partialTicks));
+        GL11.glColor4f((float)1.0f, (float)1.0f, (float)1.0f, (float)1.0f);
+        GL11.glPopMatrix();
 
         if (this.renderHand && !Shaders.isShadowPass)
         {
@@ -1802,9 +1807,6 @@ public class EntityRenderer implements IResourceManagerReloadListener
 
         if (flag)
             Shaders.endRender();
-        GL11.glPushMatrix();
-        EventBus.getInstance().call(new Render3DEvent(partialTicks));
-        GL11.glPopMatrix();
     }
 
     private void renderCloudsCheck(RenderGlobal renderGlobalIn, float partialTicks, int pass)

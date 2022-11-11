@@ -1,7 +1,6 @@
 package cc.express.gui.fontrender.utils;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class ClientUtil {
 

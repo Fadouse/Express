@@ -1,8 +1,5 @@
 package cc.express.module.values;
 
-import cc.express.event.events.ValueEvent;
-import cc.express.event.EventBus;
-
 public class Value<V> {
     String name;
     public V value;
@@ -21,12 +18,7 @@ public class Value<V> {
     }
 
     public void setValue(V val){
-        ValueEvent e = new ValueEvent(this);
-        EventBus.getInstance().call(e);
-
-        if(!e.isCancelled()){
-            this.value = val;
-        }
+        this.value = val;
     }
 
     public String getDisplayName() {

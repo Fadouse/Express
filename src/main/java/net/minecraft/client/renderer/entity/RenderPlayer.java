@@ -1,5 +1,8 @@
 package net.minecraft.client.renderer.entity;
 
+import cc.express.event.EventManager;
+import cc.express.event.rendering.EventPostRenderPlayer;
+import cc.express.event.rendering.EventRenderArm;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelPlayer;
@@ -50,6 +53,9 @@ public class RenderPlayer extends RendererLivingEntity<AbstractClientPlayer>
      */
     public void doRender(AbstractClientPlayer entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
+        //We now didn't have chams so :C
+//        EventPreRenderPlayer event = new EventPreRenderPlayer();
+//        EventManager.call(event);
         if (!entity.isUser() || this.renderManager.livingPlayer == entity)
         {
             double d0 = y;
@@ -62,6 +68,9 @@ public class RenderPlayer extends RendererLivingEntity<AbstractClientPlayer>
             this.setModelVisibilities(entity);
             super.doRender(entity, x, d0, z, entityYaw, partialTicks);
         }
+        //call postRender player
+        EventPostRenderPlayer eventPostRenderPlayer = new EventPostRenderPlayer();
+        EventManager.call(eventPostRenderPlayer);
     }
 
     private void setModelVisibilities(AbstractClientPlayer clientPlayer)
@@ -163,7 +172,17 @@ public class RenderPlayer extends RendererLivingEntity<AbstractClientPlayer>
         modelplayer.swingProgress = 0.0F;
         modelplayer.isSneak = false;
         modelplayer.setRotationAngles(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F, clientPlayer);
-        modelplayer.renderRightArm();
+
+        //Call Model
+        EventRenderArm renderModelEvent = new EventRenderArm(clientPlayer, true);
+        EventRenderArm renderModelEventPost = new EventRenderArm(clientPlayer, false);
+        EventManager.call(renderModelEvent);
+
+        if (!renderModelEvent.isCancelled())
+            modelplayer.renderRightArm();
+
+        EventManager.call(renderModelEventPost);
+
     }
 
     public void renderLeftArm(AbstractClientPlayer clientPlayer)

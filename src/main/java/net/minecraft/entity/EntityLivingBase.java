@@ -1,5 +1,7 @@
 package net.minecraft.entity;
 
+import cc.express.event.EventManager;
+import cc.express.event.world.EventLivingUpdate;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Maps;
@@ -374,6 +376,8 @@ public abstract class EntityLivingBase extends Entity
                 this.setRevengeTarget(null);
             }
         }
+        //call event
+        EventManager.call(new EventLivingUpdate(this));
 
         this.updatePotionEffects();
         this.prevMovedDistance = this.movedDistance;

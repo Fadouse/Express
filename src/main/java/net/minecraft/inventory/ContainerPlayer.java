@@ -1,5 +1,7 @@
 package net.minecraft.inventory;
 
+import cc.express.event.EventManager;
+import cc.express.event.misc.EventInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
@@ -82,6 +84,12 @@ public class ContainerPlayer extends Container
      */
     public void onContainerClosed(EntityPlayer playerIn)
     {
+        //Call EventInventory;
+        EventInventory eventInventory = new EventInventory(playerIn);
+        EventManager.call(eventInventory);
+        if(eventInventory.isCancelled())
+            return;
+
         super.onContainerClosed(playerIn);
 
         for (int i = 0; i < 4; ++i)

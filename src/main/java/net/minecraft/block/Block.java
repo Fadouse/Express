@@ -2,11 +2,16 @@ package net.minecraft.block;
 
 import java.util.List;
 import java.util.Random;
+
+import cc.express.event.EventManager;
+import cc.express.event.misc.EventCollideWithBlock;
+import cc.express.event.rendering.EventBlockRenderSide;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -457,6 +462,9 @@ public class Block
 
     public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side)
     {
+        //Call blockRender
+        EventBlockRenderSide event = new EventBlockRenderSide(worldIn, pos, side, maxX, minX, maxY, minY, maxZ, minZ);
+        EventManager.call(event);
         return side == EnumFacing.DOWN && this.minY > 0.0D ? true : (side == EnumFacing.UP && this.maxY < 1.0D ? true : (side == EnumFacing.NORTH && this.minZ > 0.0D ? true : (side == EnumFacing.SOUTH && this.maxZ < 1.0D ? true : (side == EnumFacing.WEST && this.minX > 0.0D ? true : (side == EnumFacing.EAST && this.maxX < 1.0D ? true : !worldIn.getBlockState(pos).getBlock().isOpaqueCube())))));
     }
 
@@ -479,7 +487,10 @@ public class Block
     public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity)
     {
         AxisAlignedBB axisalignedbb = this.getCollisionBoundingBox(worldIn, pos, state);
-
+        if (collidingEntity == Minecraft.getMinecraft().thePlayer) {
+            EventCollideWithBlock e = (EventCollideWithBlock) EventManager.call(new EventCollideWithBlock(this, pos, axisalignedbb));
+            axisalignedbb = e.getBoundingBox();
+        }
         if (axisalignedbb != null && mask.intersectsWith(axisalignedbb))
             list.add(axisalignedbb);
     }

@@ -1,5 +1,7 @@
 package net.minecraft.client.multiplayer;
 
+import cc.express.event.EventManager;
+import cc.express.event.attack.EventFight;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -494,6 +496,9 @@ public class PlayerControllerMP
      */
     public void attackEntity(EntityPlayer playerIn, Entity targetEntity)
     {
+        //Call Fight Event
+        EventManager.call(new EventFight(targetEntity, true));
+
         this.syncCurrentPlayItem();
         this.netClientHandler.addToSendQueue(new C02PacketUseEntity(targetEntity, C02PacketUseEntity.Action.ATTACK));
 
@@ -501,6 +506,8 @@ public class PlayerControllerMP
         {
             playerIn.attackTargetEntityWithCurrentItem(targetEntity);
         }
+
+        EventManager.call(new EventFight(targetEntity, false));
     }
 
     /**

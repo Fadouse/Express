@@ -1,5 +1,7 @@
 package net.minecraft.client.renderer.entity;
 
+import cc.express.event.EventManager;
+import cc.express.event.rendering.EventRLE;
 import com.google.common.collect.Lists;
 import java.nio.FloatBuffer;
 import java.util.List;
@@ -155,7 +157,11 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
             GlStateManager.translate(0.0F, -1.5078125F, 0.0F);
             float f5 = entity.prevLimbSwingAmount + (entity.limbSwingAmount - entity.prevLimbSwingAmount) * partialTicks;
             float f6 = entity.limbSwing - entity.limbSwingAmount * (1.0F - partialTicks);
-
+            if (entity instanceof EntityPlayer) {
+                EventRLE Eventrle = new EventRLE(entity, f6, f5, f8, f2, f7, f, 0.0625F, partialTicks);
+                EventManager.call(Eventrle);
+                if (Eventrle.isCancelled()) return;
+            }
             if (entity.isChild())
                 f6 *= 3.0F;
 
@@ -242,6 +248,10 @@ public abstract class RendererLivingEntity<T extends EntityLivingBase> extends R
 
         if (!this.renderOutlines)
             super.doRender(entity, x, y, z, entityYaw, partialTicks);
+        if (entity instanceof EntityPlayer) {
+            EventRLE rleEvent = new EventRLE(entity);
+            EventManager.call(rleEvent);
+        }
     }
 
     protected boolean setScoreTeamColor(T entityLivingBaseIn)
