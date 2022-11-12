@@ -264,9 +264,9 @@ public class NormalClickGUI extends GuiScreen
 					if (var25 instanceof Numbers) {
 						x = startX + 295.0F;
 						double current = (double) (62.0F
-								* (((Number) var25.getValue()).floatValue()
+								* (((Number) ((Numbers) var25).getValue()).floatValue()
 								- ((Numbers) var25).getMin().floatValue())
-								/ (((Numbers) var25).getMin().floatValue()
+								/ (((Numbers) var25).getMax().floatValue()
 								- ((Numbers) var25).getMin().floatValue()));
 
 						RenderUtil.drawRect(x - 4.0F, var24+1, (float) ((double) x + 69.0D), var24 + 4.0F,
@@ -294,9 +294,9 @@ public class NormalClickGUI extends GuiScreen
 						if (this.isButtonHovered(x, var24 - 2.0F, x + 100.0F, var24 + 7.0F, mouseX, mouseY)
 								&& Mouse.isButtonDown(0)) {
 							if (!this.previousmouse && Mouse.isButtonDown(0)) {
-								current = ((Numbers) var25).getMin().doubleValue();
-								double max = ((Numbers) var25).getMax().doubleValue();
-								double inc = ((Numbers) var25).getInc().doubleValue();
+								current = ((Numbers) var25).getMin();
+								double max = ((Numbers) var25).getMax();
+								double inc = ((Numbers) var25).getInc();
 								double valAbs = (double) mouseX - ((double) x + 1.0D);
 								double perc = valAbs / 64.0D;
 								perc = Math.min(Math.max(0.0D, perc), 1.0D);
