@@ -8,15 +8,15 @@ import cc.express.module.ModuleManager;
 import cc.express.plugin.PluginAPI;
 import cc.express.plugin.PluginLoader;
 import cc.express.utils.FileManager;
-import com.google.common.eventbus.EventBus;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.opengl.Display;
 
 import java.io.File;
 
 public class Client {
-    public static Client instance;
+    public static Minecraft mc = Minecraft.getMinecraft();
 
+    public static Client instance;
     public String NAME = "Express";
     public String VERSION = "1.0";
 

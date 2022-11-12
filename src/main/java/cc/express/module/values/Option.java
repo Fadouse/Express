@@ -1,8 +1,8 @@
 package cc.express.module.values;
 
 
-public class Option<B> extends Value<B> {
-    public Option(String name, B value){
+public class Option extends Value<Boolean> {
+    public Option(String name, Boolean value){
         super(name);
         this.setValue(value);
     }

@@ -5,6 +5,7 @@ import cc.express.event.world.EventPacketReceive;
 import cc.express.module.Category;
 import cc.express.module.Module;
 import cc.express.module.values.Numbers;
+import cc.express.module.values.Option;
 import cc.express.utils.client.ReflectionUtil;
 import net.minecraft.network.play.server.S12PacketEntityVelocity;
 import net.minecraft.network.play.server.S27PacketExplosion;
@@ -18,6 +19,8 @@ public class Velocity extends Module {
     //chance
     Numbers chance = new Numbers("Chance",100,0,100,1);
 
+    Option jump = new Option("Jump", false);
+
     //Register module
     public Velocity(){
         super("Velocity", Category.Combat);
@@ -28,14 +31,19 @@ public class Velocity extends Module {
     public void onPacket(EventPacketReceive e) {
         if (e.getPacket() instanceof S12PacketEntityVelocity) {
 
-            if (horizontal.getValue() == 0.0 && vertical.getValue() == 0.0 && chance.getValue()== 100.0)
-                e.setCancelled(true);
-
             S12PacketEntityVelocity packet = (S12PacketEntityVelocity) e.getPacket();
 
             if (packet.getEntityID() != mc.thePlayer.getEntityId())
                 return;
 
+
+
+
+            if (horizontal.getValue() == 0.0 && vertical.getValue() == 0.0 && chance.getValue()== 100.0)
+                e.setCancelled(true);
+
+
+            if(jump.getValue()) mc.thePlayer.jump();
             double motionX = packet.getMotionX(),
                     motionY = packet.getMotionY(),
                     motionZ = packet.getMotionZ();
@@ -56,6 +64,7 @@ public class Velocity extends Module {
             if (this.vertical.getValue() != 100.0D) {
                 motionY *= this.vertical.getValue() / 100.0D;
             }
+
             ReflectionUtil.setFieldValue(packet, (int) motionX, "motionX", "field_149415_b");
             ReflectionUtil.setFieldValue(packet, (int) motionY, "motionY", "field_149416_c");
             ReflectionUtil.setFieldValue(packet, (int) motionZ, "motionZ", "field_149414_d");
@@ -76,6 +85,7 @@ public class Velocity extends Module {
                 }
             }
 
+//            mc.thePlayer.jump();
 
             if (this.horizontal.getValue() != 100.0D) {
                 motionX *= this.horizontal.getValue() / 100.0D;

@@ -100,7 +100,7 @@ public class NormalClickGUI extends GuiScreen
 				(new Color(31, 31, 31, (int) this.opacity.getOpacity())).getRGB());
 		RenderUtil.drawRect(startX + 200.0F, startY, startX + 420.0F, startY + 320.0F,
 				(new Color(40, 40, 40, (int) this.opacity.getOpacity())).getRGB());
-		cc.express.utils.RenderUtil.drawShadow(startX,startY,startX+420,startY+320);
+		cc.express.utils.render.RenderUtil.drawShadow(startX,startY,startX+420,startY+320);
 
 //		FontManager.F20.drawStringWithShadow(Client.USERNAME,startX + (60 - FontLoaders.Baloo20.getStringWidth(Client.USERNAME))/ 2,startY + 300,new Color(255,255,255,255).getRGB());
 //		RenderUtil.drawRainbowRect(startX, startY, startX + 419, startY + 1);
@@ -279,7 +279,7 @@ public class NormalClickGUI extends GuiScreen
 						RenderUtil.drawRect((float) ((double) x + current + 2.0D), var24,
 								(float) ((double) x + current + 7.0D), var24 + 5.0F,
 								(new Color(100, 100, 100, (int) this.opacity.getOpacity())).getRGB());
-						FontManager.F18.drawStringWithShadow(var25.getDisplayName(),
+						FontManager.F18.drawStringWithShadow(var25.getName(),
 								startX + 210.0F, var24, -1);
 //						FontLoaders.kiona18.drawCenteredStringWithShadow(""+ ((((Number) var25.getValue()).doubleValue() - (double) (((Number) var25.getValue()).intValue())) == 0.0d? ((Number) var25.getValue()).intValue():((Number) var25.getValue()).doubleValue()),x + 83+14.5f,var24,-1);
 						if (!Mouse.isButtonDown(0)) {
@@ -316,7 +316,7 @@ public class NormalClickGUI extends GuiScreen
 
 					if (var25 instanceof Option) {
 						x = startX + 300.0F;
-						FontManager.F20.drawStringWithShadow(var25.getDisplayName(), startX + 210.0F, var24, -1);
+						FontManager.F20.drawStringWithShadow(var25.getName(), startX + 210.0F, var24, -1);
 //						RenderUtil.drawRect(x + 56.0F, var24, x + 76.0F, var24 + 1.0F,
 //								(new Color(255, 255, 255, (int) this.opacity.getOpacity())).getRGB());
 //						RenderUtil.drawRect(x + 56.0F, var24 + 8.0F, x + 76.0F, var24 + 9.0F,
@@ -362,12 +362,12 @@ public class NormalClickGUI extends GuiScreen
 						int next_str_2 = var26.ordinal() + 1 >= ((Mode) var25).getModes().length ? 0
 								: var26.ordinal() + 1;
 
-						FontManager.F18.drawStringWithShadow(var25.getDisplayName(), startX + 210.0F, var24+2, -1);
+						FontManager.F18.drawStringWithShadow(var25.getName(), startX + 210.0F, var24+2, -1);
 						RenderUtil.drawRect(x - 10.0F, var24 - 5.0F, x + 95.0F, var24 + 15.0F,
 								(new Color(56, 56, 56, (int) this.opacity.getOpacity())).getRGB());
 						RenderUtil.drawBorderRect((double) (x - 10.0F), (double) (var24 - 5.0F), (double) (x + 95.0F),
 								(double) (var24 + 15.0F),
-								(new Color(120, 120, 120, (int) this.opacity.getOpacity())).getRGB(), 2.0D);
+								(new Color(60, 60, 60, (int) this.opacity.getOpacity())).getRGB(), 2.0D);
 						for(int i1=0; i1<2; i1++){
 							FontManager.F18
 									.drawStringWithShadow(((Mode) var25).getModes()[next_str].name().substring(((Mode) var25).getModes()[next_str].name().length() - 2 + i1,((Mode) var25).getModes()[next_str].name().length() + i1 - 1), x - 3 + i1 * FontManager.F18.getStringWidth(((Mode) var25).getModes()[next_str].name().substring(((Mode) var25).getModes()[next_str].name().length() - 3 + i1,((Mode) var25).getModes()[next_str].name().length() + i1 - 2))  ,var24+2, new Color(255,255,255,80/(3 - (i1+1))).getRGB());
@@ -377,7 +377,7 @@ public class NormalClickGUI extends GuiScreen
 
 
 						FontManager.F18
-								.drawStringWithShadow(((Mode) var25).getName(), x + 42.5F - (float) (FontManager.F18.getStringWidth(((Mode) var25).getName()) / 2),
+								.drawStringWithShadow(((Enum<?>) ((Mode) var25).getValue()).name(), x + 42.5F - (float) (FontManager.F18.getStringWidth(((Enum<?>) ((Mode) var25).getValue()).name()) / 2),
 										var24+2, -1);
 						if (this.isStringHovered(x, var24 - 5.0F, x + 100.0F, var24 + 15.0F, mouseX, mouseY)) {
 							if(!previousmouse) {

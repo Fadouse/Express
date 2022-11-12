@@ -4,6 +4,8 @@ package cc.express.module;
 import cc.express.event.EventManager;
 import cc.express.event.EventTarget;
 import cc.express.event.misc.EventKey;
+import cc.express.module.modules.combat.AutoClicker;
+import cc.express.module.modules.combat.Criticals;
 import cc.express.module.modules.combat.Velocity;
 import cc.express.module.modules.movement.Sprint;
 import cc.express.module.modules.render.BlockHit;
@@ -23,6 +25,8 @@ public enum ModuleManager {
         EventManager.register(this);
         System.out.println("init modules...");
         //Combat
+        addModule(new AutoClicker());
+        addModule(new Criticals());
         addModule(new Velocity());
         //Movement
         addModule(new Sprint());

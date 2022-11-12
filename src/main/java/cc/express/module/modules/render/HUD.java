@@ -32,9 +32,11 @@ public class HUD extends Module {
         enabledModules.sort((o1, o2) -> FontManager.F18.getStringWidth(o2.suffix == null ? o2.getName() : o2.getName() + o2.suffix) - FontManager.F18.getStringWidth(o1.suffix == null ? o1.getName() : o1.getName() + o1.suffix));
         for (Module m : enabledModules) {
             if (m != null && m.getState()) {
-                String name = m.suffix == null ? m.getName() : m.getName() + m.suffix;
+                String name =  m.getName();
                 Color rainbow = new Color(Color.HSBtoRGB((float) ((double) mc.thePlayer.ticksExisted / 50.0 + Math.sin((double) rainbowTick / 50.0 * 1.6)) % 1.0f, 1.0f,1.0f));
-                int moduleWidth = FontManager.F18.getStringWidth(name);
+                if(m.suffix != null)
+                    FontManager.F18.drawStringWithShadow(" " + m.suffix,s.getScaledWidth()- FontManager.F18.getStringWidth(m.suffix+" ")-1, y, new Color(160,160,160).getRGB());
+                int moduleWidth = m.suffix == null ? FontManager.F18.getStringWidth(name) : FontManager.F18.getStringWidth(m.suffix + name + " ");
                 FontManager.F18.drawStringWithShadow(name, s.getScaledWidth() - moduleWidth - 1, y, rainbow.getRGB());
                 y += FontManager.F18.getHeight() + 1;
                 if (++rainbowTick > 50) {

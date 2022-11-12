@@ -20,8 +20,4 @@ public class Value<V> {
     public void setValue(V val){
         this.value = val;
     }
-
-    public String getDisplayName() {
-        return this.name;
-    }
 }

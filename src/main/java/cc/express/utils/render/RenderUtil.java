@@ -1,4 +1,4 @@
-package cc.express.utils;
+package cc.express.utils.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -23,6 +23,8 @@ public class RenderUtil {
         float f3 = (color & 0xFF) / 255.0F;
         GL11.glColor4f(f1, f2, f3, f);
     }
+
+    //2D Render
 
     //Draw Rect
     public static void drawRect(double x1, double y1, double x2, double y2, int color) {
@@ -272,6 +274,10 @@ public class RenderUtil {
         GL11.glDisable(3042);
         GL11.glEnable(2929);
     }
+
+    //3D Render
+
+
 
     //setGl
     public static void setGlState(final int cap, final boolean state) {

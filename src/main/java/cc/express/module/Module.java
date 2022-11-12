@@ -3,7 +3,6 @@ package cc.express.module;
 import cc.express.event.EventManager;
 import cc.express.module.values.Value;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.EnumChatFormatting;
 
 import java.util.ArrayList;
 
@@ -28,7 +27,7 @@ public class Module {
         if (suffix.isEmpty()) {
             this.suffix = suffix;
         } else {
-            this.suffix = String.format("§f %s§7", EnumChatFormatting.GRAY + suffix);
+            this.suffix = suffix;
         }
     }
 
