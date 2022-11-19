@@ -8,6 +8,7 @@ import cc.express.module.Category;
 import cc.express.module.Module;
 import cc.express.module.values.Mode;
 import cc.express.module.values.Numbers;
+import cc.express.utils.client.HelperUtil;
 import cc.express.utils.client.MathUtil;
 import cc.express.utils.client.TimeUtil;
 import cc.express.utils.player.PlayerUtil;
@@ -82,12 +83,14 @@ public class Criticals extends Module {
                     break;
                 }
                 case "hypixel2" : {
+                    double random = Math.random() / 10000;
                     double[] values = {
-                            0.0320583200905231428, 0.00372301200301273833, 0.000372301197509012937, Math.random() / 10000
+                            0.0320583200905231428, 0.00372301200301273833, 0.000372301197509012937, random
                     };
                     for (double value : values) {
                         mc.getNetHandler().getNetworkManager().sendPacket(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX, mc.thePlayer.posY + value, mc.thePlayer.posZ, false));
                     }
+                    HelperUtil.sendMessage("OnCrit :" + String.format("%.0f", random * 100000000));
                     break;
                 }
                 case "packet" : {

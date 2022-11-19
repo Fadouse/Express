@@ -2,6 +2,7 @@ package cc.express.module.modules.render;
 
 import cc.express.event.EventTarget;
 import cc.express.event.rendering.EventRender2D;
+import cc.express.gui.clickgui.express.RenderUtil;
 import cc.express.gui.fontrender.FontManager;
 import cc.express.module.Category;
 import cc.express.module.Module;
@@ -9,7 +10,9 @@ import cc.express.module.ModuleManager;
 import cc.express.module.values.Mode;
 import cc.express.module.values.Numbers;
 import cc.express.module.values.Option;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ public class HUD extends Module {
     Option titleBar = new Option("TitleBar", true);
 
     Numbers saturation = new Numbers("Saturation", 0.7, 0, 1, 0.1);
+    Numbers widget = new Numbers("Widget", 1, 0, 22, 1);
 
     public HUD() {
         super("HUD", Category.Render);
@@ -57,6 +61,10 @@ public class HUD extends Module {
                     }
                 }
             }
+        }
+        if (widget.getValue() != 0) {
+            Gui.drawRect(0,0,0,0,0);
+            RenderUtil.drawImage(new ResourceLocation("express/anime/Widget_" + String.valueOf(widget.getValue().intValue()) +".png"), RenderUtil.width()/4, RenderUtil.height() - 100, 100, 100);
         }
     }
 }

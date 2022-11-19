@@ -196,7 +196,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
 
             try
             {
-                this.outboundPacketsQueue.add(new NetworkManager.InboundHandlerTuplePacketListener(packetIn, null));
+                this.outboundPacketsQueue.add(new NetworkManager.InboundHandlerTuplePacketListener(packetIn, (GenericFutureListener<? extends Future<? super Void>>) null));
             }
             finally
             {
