@@ -71,11 +71,19 @@ public class Criticals extends Module {
                         !PlayerUtil.isOnGround(-2);
 
         if (event.isPre() && canCrit && event.getEntity().hurtResistantTime <= hurtTimeValue.getValue().intValue() && prevent.hasPassed(300) && timer.hasPassed(delayValue.getValue().intValue() * 100L)) {
-
             switch (modeValue.getValue().toString().toLowerCase()) {
                 case "hypixel" : {
                     double[] values = {
                             0.0625 + Math.random() / 100,0.03125 + Math.random() / 100
+                    };
+                    for (double value : values) {
+                        mc.getNetHandler().getNetworkManager().sendPacket(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX, mc.thePlayer.posY + value, mc.thePlayer.posZ, false));
+                    }
+                    break;
+                }
+                case "hypixel2" : {
+                    double[] values = {
+                            0.0320583200905231428, 0.00372301200301273833, 0.000372301197509012937, Math.random() / 10000
                     };
                     for (double value : values) {
                         mc.getNetHandler().getNetworkManager().sendPacket(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX, mc.thePlayer.posY + value, mc.thePlayer.posZ, false));
