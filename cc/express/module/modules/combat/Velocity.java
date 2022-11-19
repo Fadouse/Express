@@ -13,11 +13,11 @@ import net.minecraft.network.play.server.S27PacketExplosion;
 public class Velocity extends Module {
     //set the mode value
     //horizontal
-    Numbers horizontal = new Numbers("Horizontal",0,0,100,1);
+    Numbers horizontal = new Numbers("Horizontal",0,-100,100,5);
     //vertical
-    Numbers vertical = new Numbers("Vertical",0,0,100,1);
+    Numbers vertical = new Numbers("Vertical",0,0,100,5);
     //chance
-    Numbers chance = new Numbers("Chance",100,0,100,1);
+    Numbers chance = new Numbers("Chance",100,0,100,5);
 
     Option jump = new Option("Jump", false);
 

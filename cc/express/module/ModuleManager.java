@@ -68,7 +68,7 @@ public enum ModuleManager {
         return modules;
     }
 
-    public Module getModule(Class<?> cls) {
+    public static Module getModule(Class<?> cls) {
         for (Module m : modules) {
             if (m.getClass() == cls)
                 return m;

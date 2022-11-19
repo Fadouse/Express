@@ -4,6 +4,7 @@ import cc.express.command.Command;
 import cc.express.module.Module;
 import cc.express.module.ModuleManager;
 import cc.express.utils.ChatUtil;
+import cc.express.utils.client.HelperUtil;
 import net.minecraft.util.EnumChatFormatting;
 
 public class ToggleCommand extends Command {
@@ -18,10 +19,10 @@ public class ToggleCommand extends Command {
             if(m != null){
                 m.toggle();
             }else {
-                ChatUtil.sendMessage(EnumChatFormatting.RED + "Module not found!");
+                HelperUtil.sendMessage(EnumChatFormatting.RED + "Module not found!");
             }
         }else {
-            ChatUtil.sendMessage(EnumChatFormatting.RED + "Usage: t <Module>");
+            HelperUtil.sendMessage(EnumChatFormatting.RED + "Usage: t <Module>");
         }
     }
 }

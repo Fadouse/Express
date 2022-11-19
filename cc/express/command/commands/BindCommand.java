@@ -4,6 +4,7 @@ import cc.express.command.Command;
 import cc.express.module.Module;
 import cc.express.module.ModuleManager;
 import cc.express.utils.ChatUtil;
+import cc.express.utils.client.HelperUtil;
 import net.minecraft.util.EnumChatFormatting;
 import org.lwjgl.input.Keyboard;
 
@@ -19,12 +20,12 @@ public class BindCommand extends Command {
             if(m != null){
                 int key = Keyboard.getKeyIndex(args[1].toUpperCase());
                 m.setKey(key);
-                ChatUtil.sendMessage(EnumChatFormatting.GREEN + "Success bound " + m.getName() + " to " + Keyboard.getKeyName(m.getKey()) + "!");
+                HelperUtil.sendMessage(EnumChatFormatting.GREEN + "Success bound " + m.getName() + " to " + Keyboard.getKeyName(m.getKey()) + "!");
             }else {
-                ChatUtil.sendMessage(EnumChatFormatting.RED + "Module not found!");
+                HelperUtil.sendMessage(EnumChatFormatting.RED + "Module not found!");
             }
         }else {
-            ChatUtil.sendMessage(EnumChatFormatting.RED + "Usage: bind <Module> <Key>");
+            HelperUtil.sendMessage(EnumChatFormatting.RED + "Usage: bind <Module> <Key>");
         }
     }
 }
