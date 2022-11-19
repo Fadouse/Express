@@ -7,6 +7,7 @@ import cc.express.module.Category;
 import cc.express.module.Module;
 import cc.express.module.ModuleManager;
 import cc.express.module.values.Mode;
+import cc.express.module.values.Numbers;
 import cc.express.module.values.Option;
 import net.minecraft.client.gui.ScaledResolution;
 
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 public class HUD extends Module {
     Option arraylist = new Option("Arraylist", true);
     Option titleBar = new Option("TitleBar", true);
+
+    Numbers saturation = new Numbers("Saturation", 0.7, 0, 1, 0.1);
 
     public HUD() {
         super("HUD", Category.Render);
@@ -43,7 +46,7 @@ public class HUD extends Module {
             for (Module m : enabledModules) {
                 if (m != null && m.getState()) {
                     String name =  m.getName();
-                    Color rainbow = new Color(Color.HSBtoRGB((float) ((double) mc.thePlayer.ticksExisted / 50.0 + Math.sin((double) rainbowTick / 50.0 * 1.6)) % 1.0f, 1.0f,1.0f));
+                    Color rainbow = new Color(Color.HSBtoRGB((float) ((double) mc.thePlayer.ticksExisted / 50.0 + Math.sin((double) rainbowTick / 50.0 * 1.6)) % 1.0f, saturation.getValue().floatValue(),1.0f));
                     if(m.suffix != null)
                         FontManager.F18.drawStringWithShadow(" " + m.suffix,s.getScaledWidth()- FontManager.F18.getStringWidth(m.suffix+" ")-1, y, new Color(160,160,160).getRGB());
                     int moduleWidth = m.suffix == null ? FontManager.F18.getStringWidth(name) : FontManager.F18.getStringWidth(m.suffix + name + " ");

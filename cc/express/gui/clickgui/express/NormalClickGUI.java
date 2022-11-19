@@ -412,6 +412,10 @@ public class NormalClickGUI extends GuiScreen
 				}
 			}
 		}
+		RenderUtil.drawRect(5, RenderUtil.height() - 35, 130, RenderUtil.height() - 5, new Color(200, 200, 200).getRGB());
+		RenderUtil.drawImage(new ResourceLocation("express/icon/clickgui/Avatar.png"), 6, RenderUtil.height() - 34, 28, 28);
+		FontManager.F16.drawString("Development", 40, RenderUtil.height() - 30, new Color(30, 30, 30).getRGB());
+		FontManager.F16.drawString("Fadouse/iymelisa", 40, RenderUtil.height() - 20, new Color(30, 30, 30).getRGB());
 	}
 
 	@Override
