@@ -6,6 +6,10 @@ import cc.express.event.misc.EventClick;
 import cc.express.event.misc.EventKey;
 import cc.express.event.world.EventTick;
 import cc.express.event.world.EventWorldLoad;
+import cc.express.module.Module;
+import cc.express.module.ModuleManager;
+import cc.express.module.values.Value;
+import cc.express.utils.FileManager;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -1060,6 +1064,26 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         {
             this.stream.shutdownStream();
             logger.info("Stopping!");
+            String values = "";
+            for (Module m : ModuleManager.getModules()) {
+                for (Value v : m.getValues()) {
+                    values = String.valueOf(values) + String.format("%s:%s:%s%s", m.getName(), v.getName(), v.getValue(), System.lineSeparator());
+                }
+            }
+            FileManager.save("Values.txt", values, false);
+            String enabled = "";
+            for (Module m : ModuleManager.getModules()) {
+                if (!m.isEnabled()) continue;
+                enabled = String.valueOf(enabled) + String.format("%s%s", m.getName(), System.lineSeparator());
+            }
+            FileManager.save("Enabled.txt", enabled, false);
+            String binds = "";
+            for (Module m :ModuleManager.getModules()) {
+                if (m.getKey() != -1) {
+                    binds = String.valueOf(binds) + String.format("%s:%s%s", m.getName(), Keyboard.getKeyName(m.getKey()), System.lineSeparator());
+                }
+            }
+            FileManager.save("Binds.txt", binds, false);
 
             try
             {

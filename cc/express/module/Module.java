@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Module {
     public static final Minecraft mc = Minecraft.getMinecraft();
     public boolean state = false;
+    public boolean enabledOnStartup = false;
     public int key = -1;
     public boolean remove = false;
     public String name;

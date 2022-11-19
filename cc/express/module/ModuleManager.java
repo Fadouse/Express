@@ -4,6 +4,7 @@ package cc.express.module;
 import cc.express.event.EventManager;
 import cc.express.event.EventTarget;
 import cc.express.event.misc.EventKey;
+import cc.express.event.rendering.EventRender2D;
 import cc.express.module.modules.combat.*;
 import cc.express.module.modules.movement.Sprint;
 import cc.express.module.modules.player.FastPlace;
@@ -12,7 +13,12 @@ import cc.express.module.modules.render.BlockHit;
 import cc.express.module.modules.render.ClickGui;
 import cc.express.module.modules.render.FullBright;
 import cc.express.module.modules.render.HUD;
+import cc.express.module.values.Mode;
+import cc.express.module.values.Numbers;
+import cc.express.module.values.Option;
 import cc.express.module.values.Value;
+import cc.express.utils.FileManager;
+import org.lwjgl.input.Keyboard;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -20,6 +26,8 @@ import java.util.List;
 
 public enum ModuleManager {
     instance;
+
+    private boolean enabledNeededMod = true;
 
     public void init(){
         EventManager.register(this);
@@ -43,6 +51,8 @@ public enum ModuleManager {
         //Player
         addModule(new Nofall());
         addModule(new FastPlace());
+
+        readSettings();
     }
 
     @EventTarget
@@ -69,7 +79,7 @@ public enum ModuleManager {
 
     static final ArrayList<Module> modules = new ArrayList<Module>();
 
-    public ArrayList<Module> getModules() {
+    public static ArrayList<Module> getModules() {
         return modules;
     }
 
@@ -106,5 +116,52 @@ public enum ModuleManager {
             }
         }
         return findList;
+    }
+
+    @EventTarget
+    private void on2DRender(EventRender2D e) {
+        if (this.enabledNeededMod) {
+            this.enabledNeededMod = false;
+            for (Module m : modules) {
+                if (!m.enabledOnStartup) continue;
+                m.setState(true);
+            }
+        }
+    }
+
+    private void readSettings() {
+        List<String> binds = FileManager.read("Binds.txt");
+        for (String v : binds) {
+            String name = v.split(":")[0];
+            String bind = v.split(":")[1];
+            Module m = getModule(name);
+            if (m == null) continue;
+            m.setKey(Keyboard.getKeyIndex((String)bind.toUpperCase()));
+        }
+        List<String> enabled = FileManager.read("Enabled.txt");
+        for (String v : enabled) {
+            Module m =getModule(v);
+            if (m == null) continue;
+            m.enabledOnStartup = true;
+        }
+        List<String> vals = FileManager.read("Values.txt");
+        for (String v : vals) {
+            String name = v.split(":")[0];
+            String values = v.split(":")[1];
+            Module m = getModule(name);
+            if (m == null) continue;
+            for (Value value : m.getValues()) {
+                if (!value.getName().equalsIgnoreCase(values)) continue;
+                if (value instanceof Option) {
+                    value.setValue(Boolean.parseBoolean(v.split(":")[2]));
+                    continue;
+                }
+                if (value instanceof Numbers) {
+                    value.setValue(Double.parseDouble(v.split(":")[2]));
+                    continue;
+                }
+                ((Mode)value).setMode(v.split(":")[2]);
+            }
+        }
     }
 }
