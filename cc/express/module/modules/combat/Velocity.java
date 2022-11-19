@@ -7,6 +7,8 @@ import cc.express.module.Module;
 import cc.express.module.values.Numbers;
 import cc.express.module.values.Option;
 import cc.express.utils.client.ReflectionUtil;
+import cc.express.utils.player.MoveUtil;
+import cc.express.utils.player.PlayerUtil;
 import net.minecraft.network.play.server.S12PacketEntityVelocity;
 import net.minecraft.network.play.server.S27PacketExplosion;
 
@@ -20,7 +22,6 @@ public class Velocity extends Module {
     Numbers chance = new Numbers("Chance",100,0,100,5);
 
     Option jump = new Option("Jump", false);
-
     //Register module
     public Velocity(){
         super("Velocity", Category.Combat);
@@ -36,11 +37,10 @@ public class Velocity extends Module {
             if (packet.getEntityID() != mc.thePlayer.getEntityId())
                 return;
 
-
-
-
-            if (horizontal.getValue() == 0.0 && vertical.getValue() == 0.0 && chance.getValue()== 100.0)
+            if (horizontal.getValue() == 0.0 && vertical.getValue() == 0.0 && chance.getValue()== 100.0) {
                 e.setCancelled(true);
+            }
+
 
 
             if(jump.getValue()) mc.thePlayer.jump();
