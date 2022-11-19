@@ -6,6 +6,7 @@ import cc.express.event.EventTarget;
 import cc.express.event.misc.EventKey;
 import cc.express.module.modules.combat.*;
 import cc.express.module.modules.movement.Sprint;
+import cc.express.module.modules.player.Nofall;
 import cc.express.module.modules.render.BlockHit;
 import cc.express.module.modules.render.ClickGui;
 import cc.express.module.modules.render.FullBright;
@@ -37,6 +38,9 @@ public enum ModuleManager {
         addModule(new ClickGui());
         addModule(new HUD());
         //Misc
+
+        //Player
+        addModule(new Nofall());
 
     }
 

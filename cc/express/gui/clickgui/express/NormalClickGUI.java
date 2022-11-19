@@ -256,6 +256,9 @@ public class NormalClickGUI extends GuiScreen
 			}
 
 			var24 = startY + 30.0F;
+			if (currentModule.getValues().isEmpty()) {
+				FontManager.F18.drawCenteredString("No settings included in this module:(", startX + 310.0F, startY + 150, new Color(255, 255, 255).getRGB());
+			} else
 			for (i = 0; i < currentModule.getValues().size() && var24 <= startY + 300.0F; ++i) {
 				if (i >= this.valueStart) {
 					Value var25 = (Value) currentModule.getValues().get(i);
