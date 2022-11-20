@@ -6,6 +6,7 @@ import cc.express.event.EventTarget;
 import cc.express.event.misc.EventKey;
 import cc.express.event.rendering.EventRender2D;
 import cc.express.module.modules.combat.*;
+import cc.express.module.modules.movement.Noslow;
 import cc.express.module.modules.movement.Sprint;
 import cc.express.module.modules.player.FastPlace;
 import cc.express.module.modules.player.Nofall;
@@ -41,6 +42,7 @@ public enum ModuleManager {
         addModule(new Velocity());
         //Movement
         addModule(new Sprint());
+        addModule(new Noslow());
         //Render
         addModule(new BlockHit());
         addModule(new FullBright());

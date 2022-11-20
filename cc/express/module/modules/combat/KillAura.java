@@ -179,6 +179,8 @@ public class KillAura
                     attackEntity(target);
                     EventManager.call(new EventFight(target, false));
                     this.AttackTimer.reset();
+                    event.setYaw(getRotation1(target)[0]);
+                    event.setPitch(getRotation1(target)[1]);
                 }
             }
         }

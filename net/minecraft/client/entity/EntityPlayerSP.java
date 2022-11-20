@@ -7,6 +7,8 @@ import cc.express.event.EventManager;
 import cc.express.event.misc.EventChat;
 import cc.express.event.world.EventMove;
 import cc.express.event.world.EventUpdate;
+import cc.express.module.ModuleManager;
+import cc.express.module.modules.movement.Noslow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -794,7 +796,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
         boolean flag2 = this.movementInput.moveForward >= f;
         this.movementInput.updatePlayerMoveState();
 
-        if (this.isUsingItem() && !this.isRiding())
+        if (this.isUsingItem() && !this.isRiding() && !ModuleManager.instance.getModule(Noslow.class).isEnabled())
         {
             this.movementInput.moveStrafe *= 0.2F;
             this.movementInput.moveForward *= 0.2F;
