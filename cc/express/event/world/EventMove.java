@@ -5,10 +5,10 @@ package cc.express.event.world;
 
 
 import cc.express.event.api.events.Event;
+import cc.express.event.api.events.callables.EventCancellable;
 import net.minecraft.client.Minecraft;
 
-public class EventMove
-        implements Event {
+public class EventMove extends EventCancellable {
     public static double x;
     public static double y;
     public static double z;

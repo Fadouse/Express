@@ -9,6 +9,7 @@ import cc.express.event.world.EventMove;
 import cc.express.event.world.EventUpdate;
 import cc.express.module.ModuleManager;
 import cc.express.module.modules.movement.Noslow;
+import com.google.common.eventbus.EventBus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.MovingSoundMinecartRiding;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -262,7 +263,9 @@ public class EntityPlayerSP extends AbstractClientPlayer
 
     @Override
     public void moveEntity(double x, double y, double z) {
-        EventMove e = (EventMove) EventManager.call(new EventMove(x, y, z));
+        EventMove e = new EventMove(x,y,z);
+        EventManager.call(e);
+        if (e.isCancelled()) return;
         super.moveEntity(e.getX(), e.getY(), e.getZ());
     }
     public final boolean isMoving() {
