@@ -81,7 +81,6 @@ public class KillAura
     private static final Option Invis = new Option("Invisibles", false);
     private final Option Esp = new Option("ShowTarget", true);
     public static cc.express.module.values.Mode Mode = new Mode("Mode", AuraMode.values(), AuraMode.Single);
-    private static final Option thudOption = new Option("Information", true);
     public static boolean isBlocking;
     private final Comparator<Entity> angleComparator = Comparator.comparingDouble(e2 -> e2.getDistanceToEntity(Minecraft.getMinecraft().thePlayer));
 

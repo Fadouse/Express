@@ -6,7 +6,9 @@ import cc.express.event.EventTarget;
 import cc.express.event.misc.EventKey;
 import cc.express.event.rendering.EventRender2D;
 import cc.express.module.modules.combat.*;
+import cc.express.module.modules.misc.Disabler;
 import cc.express.module.modules.movement.Noslow;
+import cc.express.module.modules.movement.Speed;
 import cc.express.module.modules.movement.Sprint;
 import cc.express.module.modules.player.FastPlace;
 import cc.express.module.modules.player.Nofall;
@@ -43,12 +45,14 @@ public enum ModuleManager {
         //Movement
         addModule(new Sprint());
         addModule(new Noslow());
+        addModule(new Speed());
         //Render
         addModule(new BlockHit());
         addModule(new FullBright());
         addModule(new ClickGui());
         addModule(new HUD());
         //Misc
+        addModule(new Disabler());
 
         //Player
         addModule(new Nofall());
