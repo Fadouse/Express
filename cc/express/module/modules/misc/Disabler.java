@@ -69,6 +69,7 @@ public class Disabler extends Module {
             C0BPacketEntityAction packet = (C0BPacketEntityAction) event.getPacket();
 
             if (packet.getAction() == C0BPacketEntityAction.Action.START_SPRINTING || packet.getAction() == C0BPacketEntityAction.Action.STOP_SPRINTING) {
+                // 取消C0B疾跑包
                 event.setCancelled(true);
             }
         }
@@ -79,6 +80,7 @@ public class Disabler extends Module {
         if (isHypixelLobby() || mc.isSingleplayer()) return;
         if(!gameStarted) {
             event.setCancelled(true);
+            // 别他妈瞎几把动
             mc.thePlayer.motionX = mc.thePlayer.motionY = mc.thePlayer.motionZ = 0;
         }
     }
@@ -90,6 +92,7 @@ public class Disabler extends Module {
         if(mc.thePlayer.ticksExisted > 50) {
             boolean glassUnder = false;
 
+            // 检测开没开
             for(double y = event.getY() + 4; y >= event.getY() - 6; y--) {
                 Block block = mc.theWorld.getBlockState(new BlockPos(mc.thePlayer.posX, y, mc.thePlayer.posZ)).getBlock();
                 if(block instanceof BlockGlass || block instanceof BlockStainedGlass) {

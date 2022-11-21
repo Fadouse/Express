@@ -110,6 +110,7 @@ public class KillAura
 
     @EventTarget
     public void onRender3D(EventRender3D event) {
+        // 渲染选定效果
         if (this.Esp.getValue()) {
             switch ((AuraMode) Mode.getValue()) {
                 case Single:
@@ -124,6 +125,7 @@ public class KillAura
     }
 
     private boolean hasSword() {
+        // 判断自己有没有剑
         if (Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem() != null) {
             return Minecraft.getMinecraft().thePlayer.inventory.getCurrentItem().getItem() instanceof ItemSword;
         } else {
@@ -132,6 +134,7 @@ public class KillAura
     }
 
     private boolean shouldAttack() {
+        // 判断该不该打
         return this.AttackTimer.hasReached(1000.0 / (this.Cps.getValue() + MathUtil.getRandom(-1.0, 1.0)));
     }
 
@@ -139,6 +142,8 @@ public class KillAura
     private void onUpdate(EventUpdate event) {
         if(event.isPre()) {
             this.setSuffix(this.Mode.getValue());
+
+            // 获取攻击目标
 
             this.targets = getTargets(Range.getValue());
 
@@ -148,6 +153,7 @@ public class KillAura
 
             targets.sort(this.angleComparator);
 
+            // 计算延迟
             if (this.targets.size() > 1 && (this.Mode.getValue() == AuraMode.Switch || this.Mode.getValue() == AuraMode.Multiple)) {
                 if (SwitchTimer.delay(SwitchDelay.getValue().longValue()) || Mode.getValue().equals(AuraMode.Multiple)) {
                     ++this.index;
@@ -155,6 +161,7 @@ public class KillAura
                 }
             }
 
+            // 取消目标
             if (Minecraft.getMinecraft().thePlayer.ticksExisted % SwitchDelay.getValue().intValue() == 0 && this.targets.size() > 1 && this.Mode.getValue() == AuraMode.Single) {
 
                 if (target.getDistanceToEntity(Minecraft.getMinecraft().thePlayer) > Range.getValue()) {
@@ -164,6 +171,7 @@ public class KillAura
                 }
             }
 
+            // 清除当前目标
             if (target != null) {
                 target = null;
             }
@@ -174,6 +182,7 @@ public class KillAura
                 }
                 target = (EntityLivingBase) this.targets.get(this.index);
                 if (this.shouldAttack()) {
+                    // 攻击目标
                     EventManager.call(new EventFight(target, true));
                     attackEntity(target);
                     EventManager.call(new EventFight(target, false));
@@ -200,6 +209,7 @@ public class KillAura
 
     //Blocking
     private void doBlock() {
+        // 执行格挡
         if (mc.thePlayer.getHeldItem().getItem() instanceof ItemSword) {
             KeyBinding.setKeyBindState(mc.gameSettings.keyBindUseItem.getKeyCode(), true);
             if (Minecraft.getMinecraft().playerController.sendUseItem(mc.thePlayer, mc.theWorld, mc.thePlayer.inventory.getCurrentItem())) {
@@ -210,6 +220,7 @@ public class KillAura
     }
 
     private void stopBlock(){
+        // 取消格挡
         blockingAnim = false;
         isBlocking = false;
         KeyBinding.setKeyBindState(mc.gameSettings.keyBindUseItem.getKeyCode(), false);
@@ -233,7 +244,6 @@ public class KillAura
         if ((packet instanceof C07PacketPlayerDigging || packet instanceof C09PacketHeldItemChange)) {
             executingblock = false;
         } else if (packet instanceof C08PacketPlayerBlockPlacement && target != null && !executingblock) {
-//                Helper.sendMessage("KaBlockTrue");
             executingblock = true;
         }
     }
@@ -272,41 +282,6 @@ public class KillAura
         float yaw = (float) (Math.atan2(zDiff, xDiff) * 180 / 3.141592653589793D) - 90.0F;
         float pitch = (float) -(Math.atan2(yDiff, dist) * 180 / 3.141592653589793D);
         return new float[]{yaw, pitch};
-    }
-
-    public static float[] getRotation3(EntityLivingBase ent) {
-        double x = ent.posX;
-        double z = ent.posZ;
-        double y = ent.posY + ent.getEyeHeight() / 2f;
-        return getRotationFromPositionSlow(x, z, y);
-    }
-
-    public static float[] getRotation2(EntityLivingBase target) {
-        Minecraft.getMinecraft();
-        double xDiff = target.posX - Minecraft.getMinecraft().thePlayer.posX;
-        double yDiff = target.posY - Minecraft.getMinecraft().thePlayer.posY-0.2;
-        double zDiff = target.posZ - Minecraft.getMinecraft().thePlayer.posZ;
-        Minecraft.getMinecraft();
-
-        Minecraft.getMinecraft();
-
-        double dist = MathHelper.sqrt_double(xDiff * xDiff + zDiff * zDiff);
-        float yaw = (float)(Math.atan2(zDiff, xDiff) * 180 / Math.PI) - 90f;
-        float pitch = (float)((- Math.atan2(yDiff, dist)) * 180 / Math.PI);
-        float[] array = new float[2];
-        int n = 0;
-        Minecraft.getMinecraft();
-        float rotationYaw = Minecraft.getMinecraft().thePlayer.rotationYaw;
-        float n2 = yaw;
-        Minecraft.getMinecraft();
-        array[n] = rotationYaw + MathHelper.wrapAngleTo180_float(n2 - Minecraft.getMinecraft().thePlayer.rotationYaw);
-        int n3 = 1;
-        Minecraft.getMinecraft();
-        float rotationPitch = Minecraft.getMinecraft().thePlayer.rotationPitch;
-        float n4 = pitch;
-        Minecraft.getMinecraft();
-        array[n3] = rotationPitch + MathHelper.wrapAngleTo180_float(n4 - Minecraft.getMinecraft().thePlayer.rotationPitch);
-        return array;
     }
 
     public static float[] getRotation1(EntityLivingBase entity) {
@@ -380,14 +355,6 @@ public class KillAura
         GL11.glEnable(3553);
         GL11.glPopMatrix();
         GL11.glColor3f(255, 255, 255);
-    }
-
-    public static void glColor(int hex) {
-        float alpha = (float)(hex >> 24 & 255) / 255.0f;
-        float red = (float)(hex >> 16 & 255) / 255.0f;
-        float green = (float)(hex >> 8 & 255) / 255.0f;
-        float blue = (float)(hex & 255) / 255.0f;
-        GL11.glColor4f(red, green, blue, alpha == 0.0f ? 1.0f : alpha);
     }
 
     public static EntityLivingBase getTarget() {
