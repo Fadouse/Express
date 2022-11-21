@@ -30,6 +30,10 @@ public class Velocity extends Module {
     @EventTarget
     @SuppressWarnings("unused")
     public void onPacket(EventPacketReceive e) {
+        if (horizontal.getValue() == 0.0 && vertical.getValue() == 0.0 && chance.getValue()== 100.0)
+            setSuffix("Cancel");
+        else
+            setSuffix("Percentage");
         if (e.getPacket() instanceof S12PacketEntityVelocity) {
 
             S12PacketEntityVelocity packet = (S12PacketEntityVelocity) e.getPacket();

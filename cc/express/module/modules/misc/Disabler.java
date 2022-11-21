@@ -64,6 +64,7 @@ public class Disabler extends Module {
 
     @EventTarget
     public void onUpdate(EventUpdate event) {
+        setSuffix("Hypixel");
         if(mc.thePlayer.ticksExisted > 50) {
             boolean glassUnder = false;
 

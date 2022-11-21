@@ -15,6 +15,7 @@ public class Nofall extends Module {
 
     @EventTarget
     public void onUpdate(EventUpdate e) {
+        setSuffix(mode.getValue().toString());
         switch (mode.getValue().toString().toLowerCase()) {
             case "hypixelspoof" : {
                 if (mc.thePlayer.ticksExisted > 50 && mc.thePlayer.fallDistance > 3) {
