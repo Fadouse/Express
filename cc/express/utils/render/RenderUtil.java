@@ -8,12 +8,26 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class RenderUtil {
+    public static void scissor(double x, double y, double width, double height) {
+        final ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
+        final double scale = sr.getScaleFactor();
+
+        y = sr.getScaledHeight() - y;
+
+        x *= scale;
+        y *= scale;
+        width *= scale;
+        height *= scale;
+
+        GL11.glScissor((int) x, (int) (y - height), (int) width, (int) height);
+    }
     //Color
     public static void color(int color) {
         float f = (color >> 24 & 0xFF) / 255.0F;

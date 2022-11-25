@@ -90,7 +90,7 @@ public class Criticals extends Module {
                     for (double value : values) {
                         mc.getNetHandler().getNetworkManager().sendPacket(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX, mc.thePlayer.posY + value, mc.thePlayer.posZ, false));
                     }
-                    HelperUtil.sendMessage("OnCrit :" + String.format("%.0f", random * 100000000));
+                    HelperUtil.sendMessage("OnCrit :" + String.format("%.0f", random * 1e8));
                     break;
                 }
                 case "packet" : {

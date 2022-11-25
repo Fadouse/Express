@@ -27,7 +27,6 @@ public class Client {
     public Client(){
         instance = this;
         EventManager.register(this);
-        Display.setTitle("Client Loading...");
         api.loadAll(new File(Minecraft.getMinecraft().mcDataDir,"plugins"));
         FontManager.init();
         AltManager.init();

@@ -14,6 +14,7 @@ public class FastPlace extends Module {
     @EventTarget
     public void onTick(EventTick e) {
         if (mc.thePlayer.getHeldItem().getItem() instanceof ItemBlock) {
+            // 取消防止方块延迟
             this.mc.rightClickDelayTimer = 0;
         }
     }

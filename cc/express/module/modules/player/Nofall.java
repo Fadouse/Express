@@ -19,6 +19,7 @@ public class Nofall extends Module {
         switch (mode.getValue().toString().toLowerCase()) {
             case "hypixelspoof" : {
                 if (mc.thePlayer.ticksExisted > 50 && mc.thePlayer.fallDistance > 3) {
+                    // 下落距离超过三格发送地面包
                     e.setOnGround(true);
                 }
                 break;
